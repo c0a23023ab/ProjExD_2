@@ -1,7 +1,9 @@
 import os
-import sys
-import pygame as pg
 import random
+import sys
+import time
+import pygame as pg
+
 
 
 WIDTH, HEIGHT = 1100, 650
@@ -37,7 +39,18 @@ def main():
     bb_img.set_colorkey((0, 0, 0))
     bb_rct = bb_img.get_rect()
     bb_rct.center = random.randint(0, WIDTH), random.randint(0, HEIGHT)
+    go_img = pg.Surface((WIDTH, HEIGHT))
+    pg.draw.rect(go_img, (0, 0, 0), (0, 0, WIDTH, HEIGHT))
+    go_rct = go_img.get_rect()
+    go_rct.center = WIDTH/2, HEIGHT/2
+    gk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
+    gk_rct = gk_img.get_rect()
+    gk_rct.center = 370, 290
+    gk2_rct = gk_img.get_rect()
+    gk2_rct = 710,265
     vx, vy = +5, -5
+    fonto = pg.font.Font(None, 80)
+    txt = fonto.render("Game Over", True, (255, 255, 255))
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -70,9 +83,15 @@ def main():
         if not yoko:
             vx *= -1
         screen.blit(kk_img, kk_rct)
-        if kk_rct.colliderect(bb_rct):
-            return 
         screen.blit(bb_img, bb_rct)
+        if kk_rct.colliderect(bb_rct):
+            screen.blit(go_img, go_rct)
+            screen.blit(txt,[WIDTH/2-150, HEIGHT/2-50])
+            screen.blit(gk_img, gk_rct)
+            screen.blit(gk_img, gk2_rct)
+            pg.display.update()
+            time.sleep(5)
+            return
         pg.display.update()
         tmr += 1
         clock.tick(50)
