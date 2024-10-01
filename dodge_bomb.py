@@ -40,6 +40,7 @@ def main():
     bb_rct = bb_img.get_rect()
     bb_rct.center = random.randint(0, WIDTH), random.randint(0, HEIGHT)
     go_img = pg.Surface((WIDTH, HEIGHT))
+    go_img.set_alpha(200)
     pg.draw.rect(go_img, (0, 0, 0), (0, 0, WIDTH, HEIGHT))
     go_rct = go_img.get_rect()
     go_rct.center = WIDTH/2, HEIGHT/2
