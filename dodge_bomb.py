@@ -13,6 +13,7 @@ DELTA = {pg.K_UP:(0, -5),
         pg.K_LEFT:(-5, 0)}
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+
 def check_bound(obj_rct: pg.rect) -> tuple[bool, bool]:
     """
     引数　こうかとん　または　爆弾のrct
@@ -44,9 +45,9 @@ def main():
     pg.draw.rect(go_img, (0, 0, 0), (0, 0, WIDTH, HEIGHT))
     go_rct = go_img.get_rect()
     go_rct.center = WIDTH/2, HEIGHT/2
-    gk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
+    gk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)  # 泣いているこうかとんの画像
     gk_rct = gk_img.get_rect()
-    gk_rct.center = 370, 290
+    gk_rct.center = 370, 290  # こうかとんの座標
     gk2_rct = gk_img.get_rect()
     gk2_rct = 710,265
     vx, vy = +5, -5
@@ -86,10 +87,10 @@ def main():
         screen.blit(kk_img, kk_rct)
         screen.blit(bb_img, bb_rct)
         if kk_rct.colliderect(bb_rct):
-            screen.blit(go_img, go_rct)
+            screen.blit(go_img, go_rct)  # 背景の表示
             screen.blit(txt,[WIDTH/2-150, HEIGHT/2-50])
-            screen.blit(gk_img, gk_rct)
-            screen.blit(gk_img, gk2_rct)
+            screen.blit(gk_img, gk_rct)  # こうかとんの表示
+            screen.blit(gk_img, gk2_rct)  # こうかとんの表示
             pg.display.update()
             time.sleep(5)
             return
